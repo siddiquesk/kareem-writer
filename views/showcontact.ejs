@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Contacts</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container py-4">
+      <h2 class="mb-4 text-center text-primary">All Contacts</h2>
+
+      <!-- Back and Create Contact Buttons -->
+      <div class="mb-4 text-center d-flex flex-column flex-sm-row offset-1">
+        <a href="/" class="btn btn-secondary mb-2 mb-sm-0 me-sm-2"
+          >Back to Home</a
+        >
+        <a href="/contact" class="btn btn-primary ms-2">Create New Contact</a>
+      </div>
+      <% if (success && success.length > 0) { %>
+      <div class="container mt-3">
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+          <%= success %>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"></button>
+        </div>
+      </div>
+      <% } %> <% if (error && error.length > 0) { %>
+      <div class="container mt-3">
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          role="alert">
+          <%= error %>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"></button>
+        </div>
+      </div>
+      <% } %> <% if (contact.length === 0) { %>
+      <div class="alert alert-warning text-center">No contacts found.</div>
+      <% } else { %>
+      <ul class="list-group">
+        <% contact.forEach((c, index) => { %>
+        <li
+          class="list-group-item list-group-item-action mb-3 shadow-sm p-3"
+          style="cursor: pointer">
+          <div class="row">
+            <div class="col-md-1 fw-bold"><%= index + 1 %>.</div>
+            <div class="col-md-3"><strong>Name:</strong> <%= c.name %></div>
+            <div class="col-md-4"><strong>Email:</strong> <%= c.email %></div>
+            <div class="col-md-3">
+              <strong>Message:</strong> <%= c.message %>
+            </div>
+            <!-- Delete Button -->
+            <div
+              class="col-md-1 d-flex justify-content-center align-items-center">
+              <form
+                action="/contact/delete/<%= c._id %>?_method=DELETE"
+                method="POST">
+                <button type="submit" class="btn btn-danger btn-sm">
+                  <i class="bi bi-trash"></i> Delete
+                </button>
+              </form>
+            </div>
+          </div>
+        </li>
+        <% }); %>
+      </ul>
+      <% } %>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet" />
+  </body>
+</html>
