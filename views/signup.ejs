@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UR Writer - SignUp</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet" />
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <!-- Header -->
+    <header class="bg-dark border-bottom border-secondary">
+      <div
+        class="container py-3 d-flex flex-wrap justify-content-between align-items-center">
+        <a
+          href="/"
+          class="d-flex align-items-center text-white text-decoration-none">
+          <img
+            src="/images/UR Writer.png"
+            alt="Logo"
+            class="rounded-circle me-2"
+            width="40"
+            height="40" />
+          <span class="fs-4 fw-bold">UR Writer</span>
+        </a>
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a href="/" class="nav-link text-light">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="/writers" class="nav-link text-light">Writers</a>
+          </li>
+          <li class="nav-item">
+            <a href="/contact" class="nav-link text-light">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a href="/login" class="nav-link text-light">Login</a>
+          </li>
+          <li class="nav-item">
+            <a href="/signup" class="nav-link active">Signup</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <% if (success && success.length > 0) { %>
+    <div class="container mt-3">
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <%= success %>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"></button>
+      </div>
+    </div>
+    <% } %> <% if (error && error.length > 0) { %>
+    <div class="container mt-3">
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%= error %>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"></button>
+      </div>
+    </div>
+    <% } %>
+
+    <!-- Signup Form -->
+    <main class="container my-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <h2 class="mb-4 text-center">Sign Up to UR Writer</h2>
+          <form action="/signup" method="POST" novalidate>
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                placeholder="Enter your name"
+                required />
+              <div class="form-text">Your unique username.</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required />
+              <div class="form-text">We'll never share your email.</div>
+            </div>
+
+            <div class="mb-4">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                placeholder="Enter a strong password"
+                required />
+              <div class="form-text">
+                Use a mix of letters, numbers & symbols.
+              </div>
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light mt-auto border-top border-secondary py-4">
+      <div
+        class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <div class="d-flex align-items-center mb-3 mb-md-0">
+          <img
+            src="/images/UR Writer.png"
+            alt="Logo"
+            class="rounded-circle me-2"
+            width="40"
+            height="40" />
+          <span class="fs-5">UR Writer</span>
+        </div>
+        <p class="mb-2 mb-md-0">© 2025 UR Writer — All rights reserved.</p>
+        <div class="d-flex gap-3">
+          <a
+            href="https://www.facebook.com/share/1AQEQaLPdp/?mibextid=qi2Omg"
+            class="text-light"
+            target="_blank">
+            <i class="fab fa-facebook fa-lg"></i>
+          </a>
+          <a
+            href="https://x.com/Team_URWriter"
+            class="text-light"
+            target="_blank">
+            <i class="fab fa-twitter fa-lg"></i>
+          </a>
+          <a
+            href="https://www.instagram.com/ur_writer_official"
+            class="text-light"
+            target="_blank">
+            <i class="fab fa-instagram fa-lg"></i>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/ur-writer-b40aa335a"
+            class="text-light"
+            target="_blank">
+            <i class="fab fa-linkedin fa-lg"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

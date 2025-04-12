@@ -1,64 +1,77 @@
-const Writer=require("../models/writer");
+const Writer = require("../models/writer");
 
-const getWiters=async (req, res) => {
+// ===============================
+// Get all writers - Fetch and render all writers
+// ===============================
+const getWriters = async (req, res) => {
   try {
-    const writers = await Writer.find();
-    res.render("writers", { writers });
+    const writers = await Writer.find();  // Fetch writers from the database
+    res.render("writers", { writers });  // Render the writers page with fetched data
   } catch (err) {
-    console.error("Error fetching writers:", err);
-    res.status(500).send("Something went wrong");
+    res.status(500).send("Something went wrong");  // Respond with error message if something goes wrong
   }
-}
-  
-const cretaeWitersForm=(req, res) => {
-  res.render("new.ejs");
-}
+};
 
-const createAllWriter = async (req, res) => {
+// ===============================
+// Display form to create new writer
+// ===============================
+const createWritersForm = (req, res) => {
+  res.render("new.ejs");  // Render the 'new writer' form page
+};
+
+// ===============================
+// Create new writer - Save new writer in the database
+// ===============================
+const createWriter = async (req, res) => {
+  const { name, description, category, contact } = req.body;
+
   try {
-    const { name, description, category, contact } = req.body;
-    // 🧠 Yahan file se URL aur filename nikaal raha hai
-    const url = req.file?.path;
-    const filename = req.file?.filename;
-    // 🏗️ New writer with image object
+    const url = req.file?.path;  // Extract file URL
+    const filename = req.file?.filename;  // Extract file filename
+
     const newWriter = new Writer({
       name,
       description,
       category,
       contact,
-      image: {
-        url: url,
-        filename: filename
-      }
+      image: { url, filename }
     });
 
-    await newWriter.save();
+    await newWriter.save();  // Save the new writer to the database
     req.flash("success", "New Writer Created successfully");
-    res.redirect("/writers");
+    res.redirect("/writers");  // Redirect to writers page after success
 
   } catch (err) {
-    console.error("❌ Error saving writer:", err);
     req.flash("error", "Something went wrong while saving writer");
-    res.redirect("/writers");
+    res.redirect("/writers");  // Redirect back if there is an error
   }
 };
 
+// ===============================
+// Delete writer - Remove a writer from the database
+// ===============================
+const destroyWriter = async (req, res) => {
+  const { id } = req.params;  // Extract writer ID from request parameters
 
-const destroyWriters=async (req, res) => {
-  const { id } = req.params;
   try {
-    await Writer.findByIdAndDelete(id);
+    await Writer.findByIdAndDelete(id);  // Delete the writer by ID
     req.flash("success", "Writer Deleted successfully");
-    res.redirect("/writers");
+    res.redirect("/writers");  // Redirect to writers page after successful deletion
+
   } catch (err) {
-    console.log(err);
-    req.flash("error", "Failed to delete writer");
-    res.redirect("/writers");
+    req.flash("error", "Failed to delete writer");  // Flash error message if deletion fails
+    res.redirect("/writers");  // Redirect back to the writers page
   }
-}
+};
+
+// Export the controller functions for use in routes
+module.exports = { 
+  getWriters, 
+  createWritersForm, 
+  createWriter, 
+  destroyWriter 
+};
 
 
-
-module.exports={getWiters ,cretaeWitersForm,createAllWriter,destroyWriters}
 
 

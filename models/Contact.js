@@ -1,4 +1,4 @@
-// models/Writer.js
+
 
 const mongoose = require('mongoose');
 
